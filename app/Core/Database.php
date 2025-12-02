@@ -22,7 +22,7 @@ class Database
                 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
                 self::$instance = new PDO($dsn, $user, $pass);
-                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 die("Database connection failed: " . $e->getMessage());
             }
@@ -30,4 +30,8 @@ class Database
 
         return self::$instance;
     }  
+    public static function getInstance()
+    {
+        return self::getConnexion();
+    }
 }
