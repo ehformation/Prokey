@@ -48,3 +48,11 @@ $router->post('/password-types/{id}/update', 'PasswordTypeController@update');
 
 /* delete */
 $router->post('/password-types/{id}/delete', 'PasswordTypeController@destroy');
+
+
+/* Passwords Routes */
+
+/* create form */
+$router->get('/projects/{project_id}/passwords/create', 'PasswordController@create');
+/* store */
+$router->post('/projects/{id}/passwords', 'PasswordController@store');

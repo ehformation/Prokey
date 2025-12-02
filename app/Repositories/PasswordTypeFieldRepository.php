@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\Project;
+use App\Models\PasswordTypeField;
 use App\Core\Database;
 
 class PasswordTypeFieldRepository
@@ -36,6 +36,12 @@ class PasswordTypeFieldRepository
     public function delete($id)
     {
         return $this->model->delete($id);
+    }
+
+    public function getFieldsByType($typeId) {
+        $sql = "SELECT * FROM password_type_fields WHERE type_id = :type_id";
+        $params = ['type_id' => $typeId];
+        return $this->model->query($sql, $params);
     }
 
 }
