@@ -32,7 +32,11 @@ class ProjectRepository
     {
         return $this->model->update($id, $data);
     }   
-    
+
+    public function delete($id)
+    {
+        return $this->model->delete($id);
+    }
 
 }
 

@@ -73,5 +73,14 @@ class ProjectController extends Controller
         exit();
     }
 
+    public function destroy()
+    {
+        $id = $_GET['id'];
+        $this->projectRepository->delete($id);
+
+        header('Location: ' . url('/projects'));
+        exit();
+    }
+
 
 }

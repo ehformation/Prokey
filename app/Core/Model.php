@@ -49,6 +49,12 @@ class Model
         return $this->execute($sql, $params);
     }
 
+    public function delete($id)
+    {
+        $sql = "DELETE FROM {$this->table} WHERE id = ?";
+        return $this->execute($sql, [$id]);
+    }
+
     protected function query($sql, $params = [])
     {
         $stmt = $this->db->prepare($sql);
