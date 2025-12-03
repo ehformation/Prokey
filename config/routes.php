@@ -37,9 +37,6 @@ $router->get('/password-types/create', 'PasswordTypeController@create');
 /* store */
 $router->post('/password-types', 'PasswordTypeController@store');
 
-/* show */
-$router->get('/password-types/{id}/show', 'PasswordTypeController@show');
-
 /* edit form */
 $router->get('/password-types/{id}/edit', 'PasswordTypeController@edit');
 
@@ -62,3 +59,19 @@ $router->get('/projects/{project_id}/passwords/{id}/edit', 'PasswordController@e
 $router->post('/projects/{project_id}/passwords/{id}/update', 'PasswordController@update');
 /* delete */
 $router->post('/projects/{project_id}/passwords/{id}/delete', 'PasswordController@destroy');
+
+/* Password Type Fields Routes */
+/* List fields by type id */
+$router->get('/password-types/{id}/fields',  'PasswordTypeFieldController@index');
+
+/* Create field form */
+$router->get('/password-types/{id}/fields/create',  'PasswordTypeFieldController@create');
+/* Store field */
+$router->post('/password-types/{id}/fields',  'PasswordTypeFieldController@store');
+
+/* Edit field form */
+$router->get('/password-types/{password_type_id}/fields/{id}/edit',  'PasswordTypeFieldController@edit');
+/* Update field */
+$router->post('/password-types/{password_type_id}/fields/{id}/update',  'PasswordTypeFieldController@update');
+/* Delete field */
+$router->post('/password-types/{password_type_id}/fields/{id}/delete',  'PasswordTypeFieldController@destroy');
