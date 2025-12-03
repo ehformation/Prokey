@@ -39,7 +39,7 @@ class PasswordTypeFieldRepository
     }
 
     public function getFieldsByType($typeId) {
-        $sql = "SELECT * FROM password_type_fields WHERE type_id = :type_id";
+        $sql = "SELECT * FROM password_type_fields WHERE type_id = :type_id ORDER BY sort_order ASC";
         $params = ['type_id' => $typeId];
         return $this->model->query($sql, $params);
     }

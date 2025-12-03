@@ -46,6 +46,7 @@ class ProjectController extends Controller
 
         $this->view('project/show', [
             'title'=> $project['name'], 
+            'project_id'=> $project['id'], 
             'project' => $project,
             'passwords' => $passwords,
         ]);

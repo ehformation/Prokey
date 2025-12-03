@@ -29,8 +29,8 @@ class PasswordController extends Controller
             $fields = $passwordTypeFieldRepo->getFieldsByType($selected_type);
         }
 
-        $this->view('password/create', 
-            ['title' => 'Ajouter un mot de passe',
+        $this->view('password/create', [
+             'title' => 'Ajouter un mot de passe',
              'project_id' => $project_id,
              'selected_type' => $selected_type,
              'password_types' => $password_types,
@@ -53,6 +53,69 @@ class PasswordController extends Controller
         $this->passwordRepository->create($data);
 
         header('Location: ' . url('/projects/' . $_POST['project_id'] . '/show'));
+        exit();
+    }
+
+    public function edit($project_id, $id)
+    {
+        $password = $this->passwordRepository->getById($id);
+        if (!$password) {
+            $this->view('errors/404', ['title' => 'Mot de passe non trouvé']);
+            return; 
+        }
+
+        $passwordTypeRepo = new PasswordTypeRepository();
+        $password_types = $passwordTypeRepo->getAll();
+
+        $passwordTypeFieldRepo = new PasswordTypeFieldRepository();
+        $fields = $passwordTypeFieldRepo->getFieldsByType($password['type_id']);
+
+        $extra = json_decode($password['extra'], true) ?? [];
+
+        $this->view('password/edit', [
+             'title' => 'Editer le mot de passe',
+             'project_id' => $project_id,
+             'password' => $password,
+             'password_types' => $password_types,
+             'fields' => $fields,
+             'extra' => $extra,
+            ]
+        );
+    }
+    
+    public function update($project_id, $id)
+    {
+        $password = $this->passwordRepository->getById($id);
+        if (!$password) {
+            $this->view('errors/404', ['title' => 'Mot de passe non trouvé']);
+            return; 
+        }
+
+        $extra = $_POST['extra'] ?? []; 
+
+        $data = [
+            'type_id' => $_POST['password_type_id'],
+            'label' => $_POST['label'],
+            'extra' => json_encode($extra),
+        ];
+
+        $this->passwordRepository->update($id, $data);
+
+        header('Location: ' . url('/projects/' . $project_id . '/show'));
+        exit();
+    }
+
+    public function destroy($project_id, $id)
+    {
+        $password = $this->passwordRepository->getById($id);
+        if (!$password) {
+            $this->view('errors/404', ['title' => 'Mot de passe non trouvé']);
+            return; 
+        }
+
+        $this->passwordRepository->delete($id);
+
+        header('Location: ' . url('/projects/' . $project_id . '/show'));
         exit();
     }
 

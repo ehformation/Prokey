@@ -27,9 +27,8 @@
                     ?>
                 </td>
                 <td>
-                    <a href="<?php echo url('/passwords/' . $password['id']) ?>">Voir</a>
-                    <a href="<?php echo url('/passwords/' . $password['id'] . '/edit') ?>">Modifier</a>
-                    <form action="<?php echo url('/passwords/' . $password['id'] . '/delete') ?>" method="POST" style="display:inline;">
+                    <a href="<?php echo url('/projects/'. $project_id . '/passwords/' . $password['id'] . '/edit') ?>">Modifier</a>
+                    <form action="<?php echo url('/projects/'. $project_id . '/passwords/' . $password['id'] . '/delete') ?>" method="POST" style="display:inline;">
                         <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce mot de passe ?')">Supprimer</button>
                     </form>
                 </td>

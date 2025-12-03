@@ -56,3 +56,9 @@ $router->post('/password-types/{id}/delete', 'PasswordTypeController@destroy');
 $router->get('/projects/{project_id}/passwords/create', 'PasswordController@create');
 /* store */
 $router->post('/projects/{id}/passwords', 'PasswordController@store');
+/* edit */
+$router->get('/projects/{project_id}/passwords/{id}/edit', 'PasswordController@edit');
+/* update */
+$router->post('/projects/{project_id}/passwords/{id}/update', 'PasswordController@update');
+/* delete */
+$router->post('/projects/{project_id}/passwords/{id}/delete', 'PasswordController@destroy');
