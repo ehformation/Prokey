@@ -41,6 +41,18 @@
           <textarea name="extra[{{ field.field_name }}]" 
                     class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300"
                     rows="3">{{ extra[field.field_name]|default('') }}</textarea>
+        {% elseif field.field_type == 'password' %}
+          <input type="text" 
+               id="pw_{{ field.field_name }}"
+               name="extra[{{ field.field_name }}]" 
+               value="{{ extra[field.field_name]|default('') }}"
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-300">
+
+          <button type="button"
+                  class="px-3 py-2 bg-blue-500 text-white rounded-lg"
+                  onclick="generatePassword('pw_{{ field.field_name }}')">
+              Générer
+          </button>
         {% else %}
           <input type="{{ field.field_type }}" 
                  name="extra[{{ field.field_name }}]" 
