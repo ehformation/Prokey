@@ -48,10 +48,33 @@
                     <td>{{ r.label }}</td>
                     <td>
                         {% for key, value in r.extra %}
-                            <p><strong>{{ key }}</strong> : {{value}}</p>
+                            <div class="field-line">
+                            <div>
+                            <strong>{{ key }}</strong> : 
+                            <span class="hidden-value" style="display:none">
+                            {{value}}
+                            </span>
+                            <span class="hidden-mask">
+                                **********
+                            </span>
+                            </div>
+
+                            <button type="button"
+                                    class="toggle-btn"
+                                    onclick="toggleField(this)">
+                            Afficher
+                            </button>
+
+                            <button type="button"
+                                class="copy-btn"
+                                onclick="copyField(this)"
+                                data-value="{{ value }}">
+                                Copier
+                            </button>
+                            </div>
+                            
                         {% endfor %}
                     </td>
-                    
                 </tr>
             {% endfor %}
         </tbody>

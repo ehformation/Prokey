@@ -15,6 +15,44 @@
     </main>
     <footer>
         <p>&copy; 2024 Prokey</p>
+        <script>
+            function toggleField(btn) {
+                const line = btn.closest('.field-line');
+                const mask = line.querySelector('.hidden-mask');
+                const value = line.querySelector('.hidden-value');
+
+                if (value.style.display === "none") {
+                    value.style.display = "inline";
+                    mask.style.display = "none";
+                    btn.innerText = "Masquer";
+                } else {
+                    value.style.display = "none";
+                    mask.style.display = "inline";
+                    btn.innerText = "Afficher";
+                }
+            }
+
+            function copyField(btn) {
+                const value = btn.dataset.value; // récupération de la valeur d’origine
+
+                // API moderne du navigateur
+                navigator.clipboard.writeText(value)
+                    .then(() => {
+                        btn.innerText = "Copié !";
+                        btn.style.color = "green";
+
+                        // Retour à "Copier" après 1 seconde
+                        setTimeout(() => {
+                            btn.innerText = "Copier";
+                            btn.style.color = "";
+                        }, 1000);
+                    })
+                    .catch(err => {
+                        console.error("Erreur copie", err);
+                        alert("Impossible de copier.");
+                    });
+            }
+        </script>
     </footer>
 </body>
 </html>
