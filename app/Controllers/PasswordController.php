@@ -8,6 +8,7 @@ use App\Core\Validator;
 use App\Repositories\PasswordRepository;
 use App\Repositories\PasswordTypeRepository;
 use App\Repositories\PasswordTypeFieldRepository;
+use App\Services\EncryptionService;
 
 class PasswordController extends Controller
 {
@@ -43,20 +44,12 @@ class PasswordController extends Controller
 
     public function store()
     {   
-        $extra = $_POST['extra'];
-
-        $data = [
-            'project_id' => $_POST['project_id'],
-            'type_id' => $_POST['password_type_id'],
-            'label' => $_POST['label'],
-            'extra' => json_encode($extra),
-        ];
-
-        $validate = Validator::make($_POST, [
+        
+        $validated = Validator::make($_POST, [
             'project_id' => 'required|number',
-            'type_id' => 'reequired|number',
+            'password_type_id' => 'required|number',
             'label' => 'required|string|max:255',
-            'extra' => 'required|string'
+            'extra' => 'required'
         ]);
 
         if (!$validated) {
@@ -64,6 +57,18 @@ class PasswordController extends Controller
             header('Location: ' . url('/projects/' . $_POST['project_id'] . '/show'));
             exit();
         }
+
+        $extra = $_POST['extra'];
+        $extraJSON = json_encode($extra);
+
+        $extraEncrypted = EncryptionService::encrypt($extraJSON);
+
+        $data = [
+            'project_id' => $_POST['project_id'],
+            'type_id' => $_POST['password_type_id'],
+            'label' => $_POST['label'],
+            'extra' => $extraEncrypted, 
+        ];
 
         $this->passwordRepository->create($data);
 

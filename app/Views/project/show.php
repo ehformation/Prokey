@@ -21,8 +21,7 @@
                 <td><?php echo htmlspecialchars($password['label']) ?></td>
                 <td>
                     <?php 
-                        $extra = json_decode($password['extra'], true);
-                        foreach ($extra as $key => $value) {
+                        foreach ($password['extra'] as $key => $value) {
                             echo '<strong>' . htmlspecialchars($key) . ':</strong> ' . htmlspecialchars($value) . '<br>';
                         }
                     ?>
