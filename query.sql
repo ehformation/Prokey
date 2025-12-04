@@ -37,3 +37,6 @@ CREATE TABLE passwords (
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
     FOREIGN KEY (type_id) REFERENCES password_types(id)
 );
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
+(1, 'admin@test.com', '$2y$10$MrgKzApkZYJNbgWzTTHgXOYLFCefeyP7xhpAnXDyaLoxLfmwSfUTa', 'Admin');
